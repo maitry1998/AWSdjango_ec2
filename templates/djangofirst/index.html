@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+</head>
+<body>
+<h1>HEy this is us</h1>
+{% if insert_me %}
+<table>
+
+{% for acc in insert_me %}
+    <tr>
+        <td>
+{{ acc.name.name }}</td>
+        <td>
+{{ acc.date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{{form.name.value}}
+<br>
+
+{% endif %}
+</body>
+</html>
