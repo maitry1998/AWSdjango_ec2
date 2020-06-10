@@ -9,7 +9,48 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+"""
 
+
+18.220.254.196
+
+(myprojectenv) ubuntu@ip-172-31-34-200:~/myproject/AWSdjango_ec2$ cat /etc/systemd/system/gunicorn.service
+[Unit]
+Description=gunicorn daemon
+After=network.target
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/myproject/AWSdjango_ec2
+ExecStart=/home/ubuntu/myproject/myprojectenv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/myproject/AWSdjango_ec2.sock composeexample.wsgi:application
+[Install]
+WantedBy=multi-user.target
+(myprojectenv) ubuntu@ip-172-31-34-200:~/myproject/AWSdjango_ec2$
+
+
+(myprojectenv) ubuntu@ip-172-31-34-200:~/myproject/AWSdjango_ec2$ ls
+AWSD  Dockerfile  README.md  __init__.py  __pycache__  composeexample  db.sqlite3  djangofirst  docker-compose.yml  drf  manage.py  requirements.txt  static  templates
+(myprojectenv) ubuntu@ip-172-31-34-200:~/myproject/AWSdjango_ec2$
+
+
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+
+
+           └─21845 /home/ubuntu/myproject/myprojectenv/bin/python /home/ubuntu/myproject/myprojectenv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/myproject/AWSdjango_
+
+Jun 09 20:26:22 ip-172-31-34-200 systemd[1]: Stopped gunicorn daemon.
+Jun 09 20:26:22 ip-172-31-34-200 systemd[1]: Started gunicorn daemon.
+Jun 09 20:26:23 ip-172-31-34-200 gunicorn[21819]: [2020-06-09 20:26:23 +0000] [21819] [INFO] Starting gunicorn 20.0.4
+Jun 09 20:26:23 ip-172-31-34-200 gunicorn[21819]: [2020-06-09 20:26:23 +0000] [21819] [INFO] Listening at: unix:/home/ubuntu/myproject/AWSdjango_ec2.sock (21819)
+Jun 09 20:26:23 ip-172-31-34-200 gunicorn[21819]: [2020-06-09 20:26:23 +0000] [21819] [INFO] Using worker: sync
+Jun 09 20:26:23 ip-172-31-34-200 gunicorn[21819]: [2020-06-09 20:26:23 +0000] [21839] [INFO] Booting worker with pid: 21839
+Jun 09 20:26:23 ip-172-31-34-200 gunicorn[21819]: [2020-06-09 20:26:23 +0000] [21843] [INFO] Booting worker with pid: 21843
+Jun 09 20:26:23 ip-172-31-34-200 gunicorn[21819]: [2020-06-09 20:26:23 +0000] [21845] [INFO] Booting worker with pid: 21845
+
+
+
+"""
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,7 +68,7 @@ SECRET_KEY = 'bh0s#9lb(uww=hbloha1y7+=rq4t36*(+898y#noq)#a0dg$ji'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["18.220.254.196"]
 
 
 # Application definition
